@@ -1,4 +1,6 @@
 import sqlite3
+import psycopg2
+import os
 
 class MemberDB:
     def __init__(self,user_name,password,chy_points="0",cycles="0",vip="0",name="user",last_scraped="0"):
@@ -14,9 +16,18 @@ class MemberDB:
 
 class DatabaseHelper:
     def __init__(self):
-        self.db = sqlite3.connect("../db.sqlite3")
+        # self.db = sqlite3.connect("../db.sqlite3")
+        # self.c = self.db.cursor()
+        # self.member = MemberDB("user","password")
+
+
+        DATABASE_URL = os.environ['DATABASE_URL']
+        self.db = psycopg2.connect(DATABASE_URL,sslmode='require')
         self.c = self.db.cursor()
-        self.member = MemberDB("user","password")
+
+
+
+
 
     def get_members_credentials(self):
         members_t = self.c.execute("""
