@@ -6,6 +6,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from database_helper import MemberDB,DatabaseHelper
 import os
 import datetime
+from apscheduler.schedulers.blocking import BlockingScheduler
+
 
 class ChyBot:
 
@@ -15,7 +17,8 @@ class ChyBot:
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        self.driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+        # self.driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+        self.driver = webdriver.Chrome(executable_path="chromedriver.exe")
 
     def go_to_login(self):
         bot.driver.find_element_by_xpath(
@@ -37,8 +40,8 @@ class ChyBot:
         button.click()
 
     def check_chy_point(self):
-        welcome = self.delay("/html/body/div/header/div/div/span")
-        if welcome:
+        hasLoaded = self.delay_url()
+        if hasLoaded:
             self.driver.get("https://www.chymall.net/mall/UserCenter/Index")
             value = self.delay("/html/body/div/div[2]/div/div[1]/div/div[2]/div/form/ul/li[9]/input")
             text = value.get_attribute("value")
@@ -65,11 +68,18 @@ class ChyBot:
             EC.presence_of_element_located((By.XPATH, path))
         )
         return element
+    def delay_url(self):
+        hasLoaded = WebDriverWait(self.driver, 30).until(
+            EC.url_matches("https://chymall.net/")
+        )
+        return hasLoaded
 
 
 
 
+sched = BlockingScheduler()
 
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour=00,min=52)
 bot = ChyBot()
 d = DatabaseHelper()
 members = d.get_members_credentials()
@@ -81,4 +91,5 @@ for member in members:
     member.cycles = bot.check_countdown()
     member.last_scraped = datetime.datetime.now()
     d.insert_member(member=member)
+print("Scrapped")
     

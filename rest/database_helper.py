@@ -24,8 +24,7 @@ class DatabaseHelper:
         DATABASE_URL = os.environ['DATABASE_URL']
         self.db = psycopg2.connect(DATABASE_URL,sslmode='require')
         self.c = self.db.cursor()
-
-
+    
 
 
 
@@ -52,6 +51,19 @@ class DatabaseHelper:
         except Exception as e:
             print(str(e))
         self.db.commit()
+    
+    def auth_error(self,member):
+        try:
+            self.c.execute("""
+            UPDATE rest_member
+            last_scrapped = "error !"
+            WHERE user_name = %s;
+            """,
+            (member.user_name))
+        except Exception as e:
+            print(str(e))
+
+
 
 
 
