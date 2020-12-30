@@ -28,7 +28,7 @@ def get_all_members(request,page,search_string):
               "password": "N/A"}]
         })
     serializer = MemberSerializer(members,many=True)
-    paginator = Paginator(serializer.data,2)
+    paginator = Paginator(serializer.data,10)
     total = paginator.num_pages
     response = {"members" : paginator.page(page).object_list, "total_no_pages":total}
     return JsonResponse(response)
