@@ -41,11 +41,11 @@ class DatabaseHelper:
         try:
             self.c.execute("""
             UPDATE rest_member
-            SET chy_points = ?,
-            cycles = ?,
-            vip = ?,
-            last_scrapped = ?
-            WHERE user_name = ?;
+            SET chy_points = %s,
+            cycles =%s,
+            vip = %s,
+            last_scrapped = %s
+            WHERE user_name = %s;
             """,
             (member.chy_points,member.cycles,member.vip,member.last_scraped,member.user_name))
         except Exception as e:
