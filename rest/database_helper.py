@@ -35,7 +35,7 @@ class DatabaseHelper:
         FROM rest_member
         """
         ) 
-        members_t = members_q.fetchall()
+        members_t = self.c.fetchall()
         members = [ MemberDB(x[0],x[1]) for x in members_t]
         return members
     def insert_member(self,member):
