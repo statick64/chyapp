@@ -30,11 +30,12 @@ class DatabaseHelper:
 
 
     def get_members_credentials(self):
-        members_t = self.c.execute("""
+        members_q = self.c.execute("""
         SELECT user_name, password
         FROM rest_member
         """
-        ).fetchall()
+        ) 
+        members_t = members_q.fetchall()
         members = [ MemberDB(x[0],x[1]) for x in members_t]
         return members
     def insert_member(self,member):
