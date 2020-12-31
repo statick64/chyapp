@@ -56,7 +56,7 @@ class DatabaseHelper:
         try:
             self.c.execute("""
             UPDATE rest_member
-            last_scrapped = "error !"
+            SET last_scrapped = "error !"
             WHERE user_name = %s;
             """,
             (member.user_name))

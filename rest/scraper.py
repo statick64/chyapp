@@ -79,17 +79,22 @@ class ChyBot:
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour=00,min=52)
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour=1,min=5)
 bot = ChyBot()
 d = DatabaseHelper()
 members = d.get_members_credentials()
 
 for member in members:
-    bot.sign_in(member.user_name,member.password)
-    member.chy_points =   bot.check_chy_point()
-    member.vip = bot.Vip()
-    member.cycles = bot.check_countdown()
-    member.last_scraped = datetime.datetime.now()
-    d.insert_member(member=member)
+    try:
+        bot.sign_in(member.user_name,member.password)
+        member.chy_points =   bot.check_chy_point()
+        member.vip = bot.Vip()
+        member.cycles = bot.check_countdown()
+        member.last_scraped = datetime.datetime.now()
+        d.insert_member(member=member)
+    except Exception:
+        d.auth_error(member)
+
 print("Scrapped")
     
+sched.start()
