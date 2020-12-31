@@ -1,3 +1,5 @@
+
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -7,6 +9,10 @@ from database_helper import MemberDB,DatabaseHelper
 import os
 import datetime
 from apscheduler.schedulers.blocking import BlockingScheduler
+
+
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour=1,min=20)
+sched = BlockingScheduler()
 
 
 class ChyBot:
@@ -77,9 +83,7 @@ class ChyBot:
 
 
 
-sched = BlockingScheduler()
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour=1,min=20)
 bot = ChyBot()
 d = DatabaseHelper()
 members = d.get_members_credentials()
