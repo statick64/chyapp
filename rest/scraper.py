@@ -11,8 +11,9 @@ import datetime
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour=1,min=20)
 sched = BlockingScheduler()
+
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour=1,min=20)
 
 
 class ChyBot:
