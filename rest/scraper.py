@@ -94,7 +94,7 @@ for member in members:
         d.insert_member(member=member)
     except Exception as e:
         # d.auth_error(member)
-        print(e)
+        print(str(e))
 
 print("Scrapped")
     
