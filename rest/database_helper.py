@@ -61,7 +61,7 @@ class DatabaseHelper:
             vip = 'error !',
             WHERE user_name = %s;
             """,
-            (member.user_name))
+            (member.user_name,))
         except Exception as e:
             print(str(e))
 

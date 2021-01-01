@@ -13,5 +13,5 @@ class Member(models.Model):
     vip = models.CharField(max_length=50,default="0")
     user_name = models.CharField(max_length=50,default="user",unique=True)
     password = models.CharField(max_length=50,default="password")
-    last_scrapped = models.DateTimeField(default=date)
+    last_scrapped = models.CharField(max_length=50,default="unscrapped")
     queue = models.CharField(max_length=50,default="unscrapped")
