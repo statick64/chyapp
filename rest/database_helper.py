@@ -56,9 +56,9 @@ class DatabaseHelper:
         try:
             self.c.execute("""
             UPDATE rest_member
-            SET chy_points = error !,
-            cycles = error !,
-            vip = error !,"
+            SET chy_points = 'error !',
+            cycles = 'error !',
+            vip = 'error !',"
             WHERE user_name = %s;
             """,
             (member.user_name))
