@@ -47,7 +47,7 @@ class DatabaseHelper:
             last_scrapped = %s
             WHERE user_name = %s;
             """,
-            (str(member.chy_points),str(member.cycles),str(member.vip),str(member.last_scraped),str(member.user_name)))
+            (member.chy_points,member.cycles,member.vip,member.last_scraped,member.user_name))
         except Exception as e:
             print(str(e))
         self.db.commit()
@@ -56,7 +56,9 @@ class DatabaseHelper:
         try:
             self.c.execute("""
             UPDATE rest_member
-            SET last_scrapped = "error !"
+            SET chy_points = error !,
+            cycles = error !,
+            vip = error !,"
             WHERE user_name = %s;
             """,
             (member.user_name))
