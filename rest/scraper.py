@@ -92,9 +92,9 @@ for member in members:
         member.cycles = bot.check_countdown()
         member.last_scraped = datetime.datetime.now()
         d.insert_member(member=member)
-    except Exception:
+    except Exception as e:
         # d.auth_error(member)
-        print("error")
+        print(e)
 
 print("Scrapped")
     
