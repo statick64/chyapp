@@ -58,7 +58,7 @@ class DatabaseHelper:
             UPDATE rest_member
             SET chy_points = 'error !',
             cycles = 'error !',
-            vip = 'error !',
+            vip = 'error !'
             WHERE user_name = %s;
             """,
             (member.user_name,))
