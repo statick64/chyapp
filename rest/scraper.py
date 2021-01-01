@@ -93,7 +93,8 @@ for member in members:
         member.last_scraped = datetime.datetime.now()
         d.insert_member(member=member)
     except Exception:
-        d.auth_error(member)
+        # d.auth_error(member)
+        print("error")
 
 print("Scrapped")
     
