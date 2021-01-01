@@ -95,8 +95,7 @@ for member in members:
         member.last_scraped = datetime.datetime.now()
         d.insert_member(member=member)
     except Exception as e:
-        # d.auth_error(member)
-        print(str(e))
+        d.auth_error(member)
 
 print("Scrapped")
     
