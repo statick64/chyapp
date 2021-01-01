@@ -42,8 +42,10 @@ class ChyBot:
         button.click()
 
     def check_chy_point(self):
-        hasLoaded = self.delay_url()
-        if hasLoaded:
+        # hasLoaded = self.delay_url()
+        welcome = self.delay("/html/body/div/header/div/div/span")
+        # if hasLoaded:
+        if welcome:
             self.driver.get("https://www.chymall.net/mall/UserCenter/Index")
             value = self.delay("/html/body/div/div[2]/div/div[1]/div/div[2]/div/form/ul/li[9]/input")
             text = value.get_attribute("value")
