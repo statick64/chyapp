@@ -24,6 +24,7 @@ def get_all_members(request,page,search_string):
               "cycles": "N/A",
               "countdown": "N/A",
               "vip": "N/A",
+              "last_scrapped:N/A"
               "user_name": "N/A",
               "password": "N/A"}]
         })
@@ -40,8 +41,7 @@ def get_all_members(request,page,search_string):
 def create_member(request):
     serializer = MemberSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data)
+        serializer.save() return Response(serializer.data)
     else:
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
