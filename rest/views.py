@@ -41,7 +41,8 @@ def get_all_members(request,page,search_string):
 def create_member(request):
     serializer = MemberSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save() return Response(serializer.data)
+        serializer.save() 
+        return Response(serializer.data)
     else:
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
@@ -64,8 +65,7 @@ class ModifyMember(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        else:
-            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self,request,pk,format=None):
         member = self.get_object(pk)
