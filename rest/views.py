@@ -18,21 +18,27 @@ def get_all_members(request,page,search_string):
         members = Member.objects.all().order_by('-chy_points')
     if len(members) == 0:
         return JsonResponse({
-           "members": [{"id": 0,
-             "name": "N/A",
-             "chy_points": "N/A",
-              "cycles": "N/A",
-              "countdown": "N/A",
-              "vip": "N/A",
-              "last_scrapped":"N/A",
-              "user_name": "N/A",
-              "password": "N/A"}]
+        "members": [{"id": 0,
+            "name": "N/A",
+            "chy_points": "N/A",
+            "cycles": "N/A",
+            "countdown": "N/A",
+            "vip": "N/A",
+            "last_scrapped":"N/A",
+            "user_name": "N/A",
+            "password": "N/A"}]
         })
     serializer = MemberSerializer(members,many=True)
     paginator = Paginator(serializer.data,10)
     total = paginator.num_pages
+
+    if int(page) > total :
+        return JsonResponse({"msg":"Empty page error"},status=412)
+
+
     response = {"members" : paginator.page(page).object_list, "total_no_pages":total}
     return JsonResponse(response)
+        
 
 
 

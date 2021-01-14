@@ -92,7 +92,7 @@ for member in members:
         member.chy_points =   bot.check_chy_point()
         member.vip = bot.Vip()
         member.cycles = bot.check_countdown()
-        member.last_scraped = str(datetime.datetime.now().strftime("%m/%d/%Y, %H:%M"))
+        member.last_scraped = str(datetime.datetime.now().strftime("%m/%d/%Y, %I:%M %p"))
         d.insert_member(member=member)
     except Exception as e:
         d.auth_error(member)
