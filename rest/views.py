@@ -24,7 +24,7 @@ def get_all_members(request,page,search_string):
               "cycles": "N/A",
               "countdown": "N/A",
               "consumption_points":"N/A",
-              "status ":"N/A",
+              "status":"N/A",
               "vip": "N/A",
               "last_scrapped":"N/A",
               "user_name": "N/A",
