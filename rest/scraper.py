@@ -84,18 +84,18 @@ class ChyBot:
 
 bot = ChyBot()
 d = DatabaseHelper()
-members = d.get_members_credentials()
+# members = d.get_members_credentials()
 
-for member in members:
-    try:
-        bot.sign_in(member.user_name,member.password)
-        member.chy_points =   bot.check_chy_point()
-        member.vip = bot.Vip()
-        member.cycles = bot.check_countdown()
-        member.last_scraped = str(datetime.datetime.now().strftime("%m/%d/%Y, %I:%M %p"))
-        d.insert_member(member=member)
-    except Exception as e:
-        d.auth_error(member)
+# for member in members:
+#     try:
+#         bot.sign_in(member.user_name,member.password)
+#         member.chy_points =   bot.check_chy_point()
+#         member.vip = bot.Vip()
+#         member.cycles = bot.check_countdown()
+#         member.last_scraped = str(datetime.datetime.now().strftime("%m/%d/%Y, %I:%M %p"))
+#         d.insert_member(member=member)
+#     except Exception as e:
+#         d.auth_error(member)
 
-print("Scrapped")
+# print("Scrapped")
     
