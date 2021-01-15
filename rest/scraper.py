@@ -56,6 +56,19 @@ class ChyBot:
         text = value.get_attribute("value")
         return text
 
+    def cumsumption_point(self):
+        value = self.delay("/html/body/div/div[2]/div/div[1]/div/div[2]/div/form/ul/li[10]/input")
+        text = value.get_attribute("value")
+        return text    
+
+    def status(self):
+        self.driver.get("https://www.chymall.net/mall/Order/MyOrder")
+        value = self.delay("/html/body/div/div[2]/div/div[1]/div/div[2]/div/div[1]/div[1]/div[3]/span")
+        if int(value.text) in range(0,10):
+            return str(value.text)
+        else: 
+            return "sold" 
+
 
     def check_countdown(self):
         self.driver.get("https://www.chymall.net/mall/Order/MyOrder")
@@ -84,18 +97,20 @@ class ChyBot:
 
 bot = ChyBot()
 d = DatabaseHelper()
-# members = d.get_members_credentials()
+members = d.get_members_credentials()
 
-# for member in members:
-#     try:
-#         bot.sign_in(member.user_name,member.password)
-#         member.chy_points =   bot.check_chy_point()
-#         member.vip = bot.Vip()
-#         member.cycles = bot.check_countdown()
-#         member.last_scraped = str(datetime.datetime.now().strftime("%m/%d/%Y, %I:%M %p"))
-#         d.insert_member(member=member)
-#     except Exception as e:
-#         d.auth_error(member)
+for member in members:
+    try:
+        bot.sign_in(member.user_name,member.password)
+        member.chy_points =   bot.check_chy_point()
+        member.vip = bot.Vip()
+        member.cycles = bot.check_countdown()
+        member.countdown = bot.status()
+        member.queue = bot.cumsumption_point()
+        member.last_scraped = str(datetime.datetime.now().strftime("%m/%d/%Y, %H:%M"))
+        d.insert_member(member=member)
+    except Exception as e:
+        d.auth_error(member)
 
-# print("Scrapped")
+print("Scrapped")
     

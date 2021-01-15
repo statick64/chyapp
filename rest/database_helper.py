@@ -3,10 +3,12 @@ import psycopg2
 import os
 
 class MemberDB:
-    def __init__(self,user_name,password,chy_points="0",cycles="0",vip="0",name="user",last_scraped="0"):
+    def __init__(self,user_name,password,chy_points="0",cycles="0",vip="0",name="user",last_scraped="0",status="0", consumption_point= "0"):
         self.user_name = user_name
         self.password = password
         self.chy_points = chy_points
+        self.status = status
+        self.consumption_point = consumption_point
         self.cycles = cycles
         self.vip = vip
         self.name = name
@@ -44,10 +46,12 @@ class DatabaseHelper:
             SET chy_points = %s,
             cycles =%s,
             vip = %s,
+            status = %s,
+            consumption_point = %s,
             last_scrapped = %s
             WHERE user_name = %s;
             """,
-            (member.chy_points,member.cycles,member.vip,member.last_scraped,member.user_name))
+            (member.chy_points,member.cycles,member.vip,member.status,member.consumption_point,member.last_scraped,member.user_name))
         except Exception as e:
             print(str(e))
         self.db.commit()
@@ -59,6 +63,8 @@ class DatabaseHelper:
             SET chy_points = 'error !',
             cycles = 'error !',
             vip = 'error !'
+            consumption_point = 'error !,
+            status = 'error !,
             WHERE user_name = %s;
             """,
             (member.user_name,))
