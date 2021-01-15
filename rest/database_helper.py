@@ -18,9 +18,9 @@ class MemberDB:
 
 class DatabaseHelper:
     def __init__(self):
-        #self.db = sqlite3.connect("../db.sqlite3")
-        #self.c = self.db.cursor()
-        #self.member = MemberDB("user","password")
+        # self.db = sqlite3.connect("../db.sqlite3")
+        # self.c = self.db.cursor()
+        # self.member = MemberDB("user","password")
 
 
         DATABASE_URL = os.environ['DATABASE_URL']
@@ -63,6 +63,8 @@ class DatabaseHelper:
             SET chy_points = 'error !',
             cycles = 'error !',
             vip = 'error !'
+            consumption_point = 'error !,
+            status = 'error !,
             WHERE user_name = %s;
             """,
             (member.user_name,))
