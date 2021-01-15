@@ -105,8 +105,8 @@ for member in members:
         member.chy_points =   bot.check_chy_point()
         member.vip = bot.Vip()
         member.cycles = bot.check_countdown()
-        member.countdown = bot.status()
-        member.queue = bot.cumsumption_point()
+        member.status= bot.status()
+        member.consumption_point = bot.cumsumption_point()
         member.last_scraped = str(datetime.datetime.now().strftime("%m/%d/%Y, %H:%M"))
         d.insert_member(member=member)
     except Exception as e:
