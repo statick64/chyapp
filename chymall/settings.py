@@ -92,8 +92,12 @@ WSGI_APPLICATION = 'chymall.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR,'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'emem62',
+        'HOST': '192.168.190.236',
+        'PORT': '5432',
     }
 }
 
@@ -139,3 +143,4 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 #     BASE_DIR"static",
 # ]
 django_heroku.settings(locals())
+del DATABASES['default']['OPTIONS']['sslmode']
