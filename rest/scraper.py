@@ -20,7 +20,7 @@ class ChyBot:
         chrome_options.add_argument("--no-sandbox")
         chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         self.driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-        # self.driver = webdriver.Chrome(executable_path="chromedriver.exe")
+        # self.driver = webdriver.Chrome(executable_path="E:/Documents/python projects/django projects/chyapp/rest/chromedriver.exe")
 
     def go_to_login(self):
         bot.driver.find_element_by_xpath(
@@ -56,7 +56,7 @@ class ChyBot:
         text = value.get_attribute("value")
         return text
 
-    def cumsumption_point(self):
+    def consumption_point(self):
         value = self.delay("/html/body/div/div[2]/div/div[1]/div/div[2]/div/form/ul/li[10]/input")
         text = value.get_attribute("value")
         return text    
@@ -99,18 +99,28 @@ bot = ChyBot()
 d = DatabaseHelper()
 members = d.get_members_credentials()
 
+# member = MemberDB(user_name="inemesit17",password="Inemesit1",name="inemesit17")
+# bot.sign_in(member.user_name,member.password)
+# member.chy_points =   bot.check_chy_point()
+# member.consumption_point = bot.comsumption_point()
+# member.vip = bot.Vip()
+# member.status = bot.status()
+# member.cycles = bot.check_countdown()
+
 for member in members:
     try:
         bot.sign_in(member.user_name,member.password)
         member.chy_points =   bot.check_chy_point()
+        member.consumption_point = bot.consumption_point()
         member.vip = bot.Vip()
-        member.cycles = bot.check_countdown()
         member.status= bot.status()
-        member.consumption_point = bot.cumsumption_point()
+        member.cycles = bot.check_countdown()
         member.last_scraped = str(datetime.datetime.now().strftime("%m/%d/%Y, %H:%M"))
         d.insert_member(member=member)
     except Exception as e:
         d.auth_error(member)
+
+bot.driver.close()        
 
 print("Scrapped")
     

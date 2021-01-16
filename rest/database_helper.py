@@ -2,6 +2,10 @@ import sqlite3
 import psycopg2
 import os
 
+ 
+
+
+
 class MemberDB:
     def __init__(self,user_name,password,chy_points="0",cycles="0",vip="0",name="user",last_scraped="0",status="0", consumption_point= "0"):
         self.user_name = user_name
@@ -25,6 +29,7 @@ class DatabaseHelper:
 
         DATABASE_URL = os.environ['DATABASE_URL']
         self.db = psycopg2.connect(DATABASE_URL,sslmode='require')
+        # self.db = psycopg2.connect(DATABASE_URL)
         self.c = self.db.cursor()
     
 
@@ -47,11 +52,12 @@ class DatabaseHelper:
             cycles =%s,
             vip = %s,
             status = %s,
-            consumption_point = %s,
+            consumption_points = %s,
             last_scrapped = %s
             WHERE user_name = %s;
             """,
             (member.chy_points,member.cycles,member.vip,member.status,member.consumption_point,member.last_scraped,member.user_name))
+
         except Exception as e:
             print(str(e))
         self.db.commit()
