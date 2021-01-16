@@ -63,7 +63,7 @@ class DatabaseHelper:
             SET chy_points = 'error !',
             cycles = 'error !',
             vip = 'error !',
-            consumption_point = 'error !',
+            consumption_points = 'error !',
             status = 'error !'
             WHERE user_name = %s;
             """,
