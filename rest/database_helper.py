@@ -64,7 +64,7 @@ class DatabaseHelper:
             cycles = 'error !',
             vip = 'error !',
             consumption_point = 'error !',
-            status = 'error !',
+            status = 'error !'
             WHERE user_name = %s;
             """,
             (member.user_name,))
