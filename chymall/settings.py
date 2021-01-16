@@ -143,4 +143,5 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 #     BASE_DIR"static",
 # ]
 django_heroku.settings(locals())
-del DATABASES['default']['OPTIONS']['sslmode']
+if os.environ['DEV_ENVIROMENT'] == "dev":
+    del DATABASES['default']['OPTIONS']['sslmode']
