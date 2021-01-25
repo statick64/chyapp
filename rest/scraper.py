@@ -74,9 +74,14 @@ class ChyBot:
 
 
     def check_countdown(self):
-        self.driver.get("https://www.chymall.net/mall/Order/MyOrder")
-        value = self.delay("/html/body/div/div[2]/div/div[1]/div/div[2]/div/div[1]/div[1]/p[2]")
-        return value.text
+          try:
+            value = self.delay("/html/body/div/div[2]/div/div[1]/div/div[2]/div/div[1]/div[1]/p[2]")
+            return value.text)
+        except:
+            if self.status() == "sold":
+                return "sold"
+            else:
+                return "not sold"
 
     def delay_click(self,path):
         element = WebDriverWait(self.driver, 30).until(
