@@ -77,7 +77,7 @@ class ChyBot:
     def check_countdown(self):
           try:
             value = self.delay("/html/body/div/div[2]/div/div[1]/div/div[2]/div/div[1]/div[1]/p[2]")
-            return value.text)
+            return value.text
         except:
             if self.status() == "sold":
                 return "sold"
