@@ -69,12 +69,12 @@ class ChyBot:
                 return str(value.text)
             else: 
                 return "sold"
-        except :
+        except:
             return "sold"
 
 
     def check_countdown(self):
-          try:
+        try:
             value = self.delay("/html/body/div/div[2]/div/div[1]/div/div[2]/div/div[1]/div[1]/p[2]")
             return value.text
         except:
