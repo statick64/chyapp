@@ -28,8 +28,8 @@ class DatabaseHelper:
 
 
         DATABASE_URL = os.environ['DATABASE_URL']
-        self.db = psycopg2.connect(DATABASE_URL,sslmode='require')
-        # self.db = psycopg2.connect(DATABASE_URL)
+        # self.db = psycopg2.connect(DATABASE_URL,sslmode='require')
+        self.db = psycopg2.connect(DATABASE_URL)
         self.c = self.db.cursor()
     
 

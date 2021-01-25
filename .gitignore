@@ -1,4 +1,3 @@
-chymall/settings.py
 verification_codes.json
 beeep/__pycache__/urls.cpython-37.pyc
 *.pyc

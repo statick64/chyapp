@@ -96,7 +96,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'emem62',
-        'HOST': '192.168.190.236',
+        'HOST': os.environ['DB_HOST'],
         'PORT': '5432',
     }
 }
@@ -142,6 +142,7 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 # STATICFILES_DIRS = [
 #     BASE_DIR"static",
 # ]
-django_heroku.settings(locals())
-if os.environ['DEV_ENVIROMENT'] == "dev":
-    del DATABASES['default']['OPTIONS']['sslmode']
+#TODO : Reverse heroku
+# django_heroku.settings(locals())
+# if os.environ['DEV_ENVIROMENT'] == "dev":
+#     del DATABASES['default']['OPTIONS']['sslmode']
