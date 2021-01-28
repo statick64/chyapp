@@ -19,8 +19,8 @@ class ChyBot:
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        self.driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-        # self.driver = webdriver.Chrome(executable_path="C:/Users/Kenne/Documents/code/projects/fun/fun/rest/chromedriver.exe")
+        # self.driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+        self.driver = webdriver.Chrome(executable_path="C:/Users/Kenne/Documents/code/projects/fun/fun/rest/chromedriver.exe")
 
     def go_to_login(self):
         bot.driver.find_element_by_xpath(
@@ -64,12 +64,12 @@ class ChyBot:
     def status(self):
         self.driver.get("https://www.chymall.net/mall/Order/MyOrder")
         try:
-            value = self.delay("/html/body/div/div[2]/div/div[1]/div/div[2]/div/div[1]/div[1]/div[3]/span")
+            value = self.delay("/html/body/div/div[2]/div/div[1]/div/div[2]/div/div[1]/div[1]/div[3]/spa")
             if int(value.text) in range(0,10):
                 return str(value.text)
             else: 
                 return "sold"
-        except:
+        except :
             return "sold"
 
 
@@ -78,10 +78,7 @@ class ChyBot:
             value = self.delay("/html/body/div/div[2]/div/div[1]/div/div[2]/div/div[1]/div[1]/p[2]")
             return value.text
         except:
-            if self.status() == "sold":
-                return "sold"
-            else:
-                return "not sold"
+            return "not sold"
 
     def delay_click(self,path):
         element = WebDriverWait(self.driver, 30).until(
@@ -122,7 +119,10 @@ for member in members:
         member.consumption_point = bot.consumption_point()
         member.vip = bot.Vip()
         member.status= bot.status()
-        member.cycles = bot.check_countdown()
+        if member.status == "sold":
+            member.cycles = "sold"
+        else:
+            member.cycles = bot.check_countdown()
         member.last_scraped = str(datetime.datetime.now().strftime("%m/%d/%Y, %H:%M"))
         d.insert_member(member=member)
     except Exception as e:
