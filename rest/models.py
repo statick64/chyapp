@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+import pandas as pd
 
 # Create your models here.
 
@@ -15,3 +16,11 @@ class Member(models.Model):
     password = models.CharField(max_length=50,default="password")
     last_scrapped = models.CharField(max_length=50,default="unscrapped")
     consumption_points = models.CharField(max_length=50,default="unscrapped")
+
+
+    @staticmethod
+    def sort_members(param,member_list):
+        member_df = pd.DataFrame(member_list)
+        member_sorted = [member_df.sort_values(by=[param],ascending=False).to_dict(orient="index")]
+        return member_sorted
+

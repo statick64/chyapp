@@ -13,12 +13,14 @@ from django.shortcuts import render
 
 @api_view(['GET'])
 def get_all_members(request,page,search_string):
-    param = request.GET.get('sortby','')
+    param = request.GET.get('sortby','status')
     
     if search_string == "any":
-        members = Member.objects.all().order_by('-' + param)
+        members = Member.objects.all().values()
+        members = Member.sort_members(param,members)
     else:
-        members = Member.objects.all().filter(name__icontains=search_string).order_by('-' + param)
+        members = Member.objects.all().filter(name__icontains=search_string).values()
+        members = Member.sort_members(param,members)
     if len(members) == 0:
         return JsonResponse({
            "members": [{"id": 0,
@@ -33,8 +35,8 @@ def get_all_members(request,page,search_string):
               "user_name": "N/A",
               "password": "N/A"}]
         })
-    serializer = MemberSerializer(members,many=True)
-    paginator = Paginator(serializer.data,10)
+
+    paginator = Paginator(members,10)
     total = paginator.num_pages
 
     if int(page) > total :

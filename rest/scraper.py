@@ -123,6 +123,7 @@ for member in members:
         member.consumption_point = bot.consumption_point()
         member.vip = bot.Vip()
         member.status= bot.status()
+        # TODO check for status heres
         member.cycles = bot.check_countdown()
         member.last_scraped = str(datetime.datetime.now().strftime("%m/%d/%Y, %H:%M"))
         d.insert_member(member=member)

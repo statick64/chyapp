@@ -25,3 +25,4 @@ urllib3==1.26.2
 webdriver-manager==3.2.2
 whitenoise==5.2.0
 APScheduler==3.6.3
+pandas==1.2.1
