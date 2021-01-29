@@ -143,6 +143,6 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 #     BASE_DIR"static",
 # ]
 #TODO : Reverse heroku
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
 # if os.environ['DEV_ENVIROMENT'] == "dev":
 #     del DATABASES['default']['OPTIONS']['sslmode']
