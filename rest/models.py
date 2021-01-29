@@ -21,6 +21,7 @@ class Member(models.Model):
     @staticmethod
     def sort_members(param,member_list):
         member_df = pd.DataFrame(member_list)
-        member_sorted = [member_df.sort_values(by=[param],ascending=False).to_dict(orient="index")]
+        member_sorted = [member_df.sort_values(by=[param],ascending=False).to_dict(orient="index")[
+            key] for key in member_df.sort_values(by=[param],ascending=False).to_dict(orient="index")]
         return member_sorted
 
