@@ -65,7 +65,7 @@ class ChyBot:
     def status(self):
         self.driver.get("https://www.chymall.net/mall/Order/MyOrder")
         try:
-            value = self.delay("/html/body/div/div[2]/div/div[1]/div/div[2]/div/div[1]/div[1]/div[3]/spa")
+            value = self.delay("/html/body/div/div[2]/div/div[1]/div/div[2]/div/div[1]/div[1]/div[3]/span")
             if int(value.text) in range(0,10):
                 return str(value.text)
             else: 
