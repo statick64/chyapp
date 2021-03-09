@@ -13,6 +13,7 @@ from django.shortcuts import render
 
 @api_view(['GET'])
 def get_all_members(request,page,search_string):
+
     param = request.GET.get('sortby','status')
     
     if search_string == "any":
@@ -20,7 +21,8 @@ def get_all_members(request,page,search_string):
         members = Member.sort_members(param,members)
     else:
         members = Member.objects.all().filter(name__icontains=search_string).values()
-        members = Member.sort_members(param,members)
+        if len(members) != 0:
+            members = Member.sort_members(param,members)
     if len(members) == 0:
         return JsonResponse({
            "members": [{"id": 0,

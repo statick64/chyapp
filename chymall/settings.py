@@ -27,7 +27,7 @@ SECRET_KEY = 'wp%0fn!bjvc2_fod+=h(3)l-+164e+6n1!-byh=0h&2u-e9urn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -143,6 +143,6 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 #     BASE_DIR"static",
 # ]
 #TODO : Reverse heroku
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 # if os.environ['DEV_ENVIROMENT'] == "dev":
 #     del DATABASES['default']['OPTIONS']['sslmode']
