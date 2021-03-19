@@ -51,7 +51,28 @@ def get_all_members(request):
     return JsonResponse(response)
         
 
-
+@api_view(['GET'])
+def get_all_mems(request,search_string):
+    members = Member.objects.all().order_by('-name').filter(name__icontains=search_string)
+    if search_string == "any":
+        members = Member.objects.all().order_by('-status')
+    if len(members) == 0:
+        return JsonResponse({
+           "members": [{"id": 0,
+             "name": "N/A",
+             "chy_points": "N/A",
+              "cycles": "N/A",
+              "countdown": "N/A",
+              "consumption_points":"N/A",
+              "status":"N/A",
+              "vip": "N/A",
+              "last_scrapped":"N/A",
+              "user_name": "N/A",
+              "password": "N/A"}]
+        })
+    serializer = MemberSerializer(members,many=True)
+    response = {"members" : serializer.data }
+    return JsonResponse(response)
 
 
 @api_view(['POST'])
